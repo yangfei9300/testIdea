@@ -58,8 +58,6 @@ public class YyController {
         map.put("code",1);
         map.put("code",1);
         map.put("code",1);
-        map.put("code",1);
-        map.put("code",1);
         return map;
     }
 }
