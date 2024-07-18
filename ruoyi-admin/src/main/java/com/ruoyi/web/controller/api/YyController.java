@@ -53,6 +53,13 @@ public class YyController {
         List<YyGoods> yyGoodTypeList=  yyGoodsService.selectYyGoodsList(yyGoods);
         map.put("data",yyGoodTypeList);
         map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
         return map;
     }
 }
