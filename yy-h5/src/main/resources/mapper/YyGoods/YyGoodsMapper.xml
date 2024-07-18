@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.YyGoods.mapper.YyGoodsMapper">
+    
+    <resultMap type="YyGoods" id="YyGoodsResult">
+        <result property="id"    column="id"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="name"    column="name"    />
+        <result property="img"    column="img"    />
+        <result property="banners"    column="banners"    />
+        <result property="yPrice"    column="y_price"    />
+        <result property="xPrice"    column="x_price"    />
+        <result property="content"    column="content"    />
+        <result property="kucun"    column="kucun"    />
+        <result property="sale"    column="sale"    />
+    </resultMap>
+
+    <sql id="selectYyGoodsVo">
+        select id, type_id, name, img, banners, y_price, x_price, content, kucun, sale from yy_goods
+    </sql>
+
+    <select id="selectYyGoodsList" parameterType="YyGoods" resultMap="YyGoodsResult">
+        <include refid="selectYyGoodsVo"/>
+        <where>  
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="banners != null  and banners != ''"> and banners = #{banners}</if>
+            <if test="yPrice != null  and yPrice != ''"> and y_price = #{yPrice}</if>
+            <if test="xPrice != null  and xPrice != ''"> and x_price = #{xPrice}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="kucun != null  and kucun != ''"> and kucun = #{kucun}</if>
+            <if test="sale != null  and sale != ''"> and sale = #{sale}</if>
+        </where>
+    </select>
+    
+    <select id="selectYyGoodsById" parameterType="Long" resultMap="YyGoodsResult">
+        <include refid="selectYyGoodsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYyGoods" parameterType="YyGoods">
+        insert into yy_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="name != null">name,</if>
+            <if test="img != null">img,</if>
+            <if test="banners != null">banners,</if>
+            <if test="yPrice != null">y_price,</if>
+            <if test="xPrice != null">x_price,</if>
+            <if test="content != null">content,</if>
+            <if test="kucun != null">kucun,</if>
+            <if test="sale != null">sale,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="img != null">#{img},</if>
+            <if test="banners != null">#{banners},</if>
+            <if test="yPrice != null">#{yPrice},</if>
+            <if test="xPrice != null">#{xPrice},</if>
+            <if test="content != null">#{content},</if>
+            <if test="kucun != null">#{kucun},</if>
+            <if test="sale != null">#{sale},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYyGoods" parameterType="YyGoods">
+        update yy_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="banners != null">banners = #{banners},</if>
+            <if test="yPrice != null">y_price = #{yPrice},</if>
+            <if test="xPrice != null">x_price = #{xPrice},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="kucun != null">kucun = #{kucun},</if>
+            <if test="sale != null">sale = #{sale},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteYyGoodsById" parameterType="Long">
+        delete from yy_goods where id = #{id}
+    </delete>
+
+    <delete id="deleteYyGoodsByIds" parameterType="String">
+        delete from yy_goods where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

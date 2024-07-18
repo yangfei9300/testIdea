@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.YyGoodType.mapper.YyGoodTypeMapper">
+    
+    <resultMap type="YyGoodType" id="YyGoodTypeResult">
+        <result property="id"    column="id"    />
+        <result property="typeName"    column="typeName"    />
+        <result property="typeIcon"    column="type_icon"    />
+    </resultMap>
+
+    <sql id="selectYyGoodTypeVo">
+        select id, typeName, type_icon from yy_good_type
+    </sql>
+
+    <select id="selectYyGoodTypeList" parameterType="YyGoodType" resultMap="YyGoodTypeResult">
+        <include refid="selectYyGoodTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and typeName like concat('%', #{typeName}, '%')</if>
+            <if test="typeIcon != null  and typeIcon != ''"> and type_icon = #{typeIcon}</if>
+        </where>
+    </select>
+    
+    <select id="selectYyGoodTypeById" parameterType="Long" resultMap="YyGoodTypeResult">
+        <include refid="selectYyGoodTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYyGoodType" parameterType="YyGoodType">
+        insert into yy_good_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="typeName != null and typeName != ''">typeName,</if>
+            <if test="typeIcon != null">type_icon,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="typeName != null and typeName != ''">#{typeName},</if>
+            <if test="typeIcon != null">#{typeIcon},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYyGoodType" parameterType="YyGoodType">
+        update yy_good_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null and typeName != ''">typeName = #{typeName},</if>
+            <if test="typeIcon != null">type_icon = #{typeIcon},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteYyGoodTypeById" parameterType="Long">
+        delete from yy_good_type where id = #{id}
+    </delete>
+
+    <delete id="deleteYyGoodTypeByIds" parameterType="String">
+        delete from yy_good_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
