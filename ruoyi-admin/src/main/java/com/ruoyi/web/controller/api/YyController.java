@@ -35,6 +35,10 @@ public class YyController {
         yyGsInfo=  gsInfoService.selectYyGsInfoById(1L);
         map.put("data",yyGsInfo);
         map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
+        map.put("code",1);
         return map;
     }
     @PostMapping("/gettype")
