@@ -15,18 +15,7 @@ public class RuoYiApplication
     public static void main(String[] args)
     {
         System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
-        System.out.printf("你们好啊");
 
-
-        System.out.printf("测试分支合并");
-        System.out.printf("测试分支合并");
-        System.out.printf("测试分支合并");
-        System.out.printf("测试分支合并");
 
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(RuoYiApplication.class, args);
